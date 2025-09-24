@@ -1,7 +1,7 @@
 ## Cài đặt
-1. Khởi tạo
-2. Cài inertia + vuejs
-3. Cài vuetify
+1. [x] Khởi tạo 
+2. [x] Cài inertia + vuejs
+3. [x] Cài vuetify
 
 ## Xây dựng trang homepage
 ### Yêu cầu
