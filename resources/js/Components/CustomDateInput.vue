@@ -1,14 +1,13 @@
 <template>
     <v-text-field
-        :label="props.label"
+        :label="label"
         type="date"
-        v-model=""
+        v-model="model"
     >
     </v-text-field>
 </template>
 
 <script setup>
-const props = defineProps({
-    label:String
-})
+const model = defineModel('model')
+const label = defineModel('label')
 </script>

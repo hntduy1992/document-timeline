@@ -7,13 +7,18 @@
                         variant="outlined"
                         v-model="formData.so_hieu"
                         label="Số hiệu"
+                        :error-messages="formData.errors.so_hieu"
                     ></v-text-field>
                 </v-col>
                 <v-col cols="12" md="4">
-                    <custom-date-input
+                    <v-text-field
+                        type="date"
                         v-model="formData.ngay_ban_hanh"
                         label="Ngày ban hành"
-                    ></custom-date-input>
+                        variant="outlined"
+                        :error-messages="formData.errors.so_hieu"
+                        clearable
+                        ></v-text-field>
                 </v-col>
                 <v-col cols="4">
                     <v-checkbox
@@ -27,7 +32,8 @@
                         v-model="formData.tieu_de"
                         label="Tiêu đề"
                         variant="outlined"
-                        required
+                        :error-messages="formData.errors.tieu_de"
+                        clearable
                     ></v-text-field>
                 </v-col>
                 <v-col cols="12">
@@ -36,17 +42,23 @@
                         v-model="formData.trich_yeu"
                         label="Trích yếu"
                         rows="3"
+                        clearable
                     ></v-textarea>
                 </v-col>
 
                 <v-col cols="12">
-                    <v-combobox
-                        variant="outlined"
+                    <v-chip-group
                         v-model="formData.tag"
-                        label="Thẻ (Tags)"
                         multiple
-                        chips
-                    ></v-combobox>
+                    >
+                        <v-chip v-for="(tag) of tags "
+                                :value="tag.id"
+                            :text="tag.name"
+                            variant="outlined"
+                            filter
+                        ></v-chip>
+                    </v-chip-group>
+                    {{formData.tag}}
                 </v-col>
 
                 <v-col cols="12">
@@ -55,6 +67,10 @@
                         v-model="formData.file"
                         label="Tải lên tệp đính kèm"
                         prepend-icon="mdi-paperclip"
+                        :error-messages="formData.errors.file"
+                        accept="application/pdf, application/msword"
+                        show-size
+                        clearable
                     ></v-file-input>
                 </v-col>
 
@@ -67,11 +83,11 @@
 </template>
 
 <script setup>
-import {useForm} from "@inertiajs/vue3";
+import {useForm, usePage} from "@inertiajs/vue3";
 import CustomDateInput from "@/Components/CustomDateInput.vue";
-
+const page = usePage();
 const formData = useForm({
-    ngay_ban_hanh: new Date(),
+    ngay_ban_hanh: '2025-12-22',
     trang_thai: false,
     so_hieu: '',
     tieu_de: '',
@@ -80,8 +96,13 @@ const formData = useForm({
     tag: [],
 });
 
+const tags = page.props.tags;
 const submitForm = async () => {
-
+    formData.post('/them-van-ban',{
+        onSuccess:()=>{
+            alert('Success')
+        }
+    });
 };
 </script>
 

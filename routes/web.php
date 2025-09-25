@@ -12,3 +12,4 @@ Route::get('/dashboard',function (){
    return Inertia::render('Auth/DashboardPage',[]);
 });
 Route::get('/them-van-ban', [VanBanController::class,'create']);
+Route::post('/them-van-ban', [VanBanController::class,'store']);

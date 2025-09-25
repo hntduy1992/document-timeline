@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\CreateVanBan;
+use App\Http\Requests\VanBanCreateRequest;
+use App\Models\Tag;
 use App\Models\VanBan;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -22,15 +25,20 @@ class VanBanController extends Controller
     public function create()
     {
         $van_ban = new VanBan();
-        return Inertia::render('Auth/VanBan/CreateVanBanPage',['van_ban'=>$van_ban]);
+        $tags = Tag::query()->get(['id','name']);
+        return Inertia::render('Auth/VanBan/CreateVanBanPage',['van_ban'=>$van_ban, 'tags'=>$tags]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(VanBanCreateRequest $request)
     {
-        //
+        $validatedField = $request->validated();
+
+//        $vanban = (new CreateVanBan())->execute($validatedField);
+//
+        return response()->json(['data'=>$validatedField]);
     }
 
     /**

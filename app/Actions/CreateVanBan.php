@@ -2,14 +2,18 @@
 
 namespace App\Actions;
 
+use App\Http\Requests\VanBanCreateRequest;
+use App\Models\Tag;
 use App\Models\VanBan;
 
 class CreateVanBan
 {
-    public function __invoke($request)
+    public function execute(array $data): VanBan
     {
-        // TODO: Implement __invoke() method.
+//        Kiểm tra tag
+        $tags = $data['tag'];
 
-        return VanBan::create($request->all());
+//        Kiểm tra file
+        return VanBan::create($request);
     }
 }

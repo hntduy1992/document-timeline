@@ -24,7 +24,6 @@ const drawer = ref(true)
             </v-list>
         </v-navigation-drawer>
         <v-main>
-
             <slot></slot>
         </v-main>
     </v-app>
