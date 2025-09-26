@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Actions\CreateVanBan;
 use App\Http\Requests\VanBanCreateRequest;
 use App\Models\Tag;
 use App\Models\VanBan;
+use App\Models\VanBanFile;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Inertia\Inertia;
 
 class VanBanController extends Controller
@@ -24,9 +25,8 @@ class VanBanController extends Controller
      */
     public function create()
     {
-        $van_ban = new VanBan();
-        $tags = Tag::query()->get(['id','name']);
-        return Inertia::render('Auth/VanBan/CreateVanBanPage',['van_ban'=>$van_ban, 'tags'=>$tags]);
+        $tags = Tag::query()->get(['id', 'name']);
+        return Inertia::render('Auth/VanBan/CreateVanBanPage', ['tags' => $tags]);
     }
 
     /**
@@ -34,11 +34,23 @@ class VanBanController extends Controller
      */
     public function store(VanBanCreateRequest $request)
     {
+//        Xác thực
         $validatedField = $request->validated();
-
-//        $vanban = (new CreateVanBan())->execute($validatedField);
-//
-        return response()->json(['data'=>$validatedField]);
+        $vanBan = VanBan::create($request->all());
+//        Lưu file vào database
+        if ($request->hasFile('file')) {
+            $fileUpload = $request->file('file');
+            $fileName = Str::slug($validatedField['so_hieu'] . '-' . $validatedField['ngay_ban_hanh']);
+            $path = $fileUpload->store('uploads/files/documents/temp', 'public');
+            VanBanFile::create([
+                'id_van_ban' => $vanBan->id,
+                'name' => $fileName,
+                'path' => $path,
+                'extension' => $fileUpload->clientExtension(),
+                'size' => $fileUpload->getSize()
+            ]);
+        }
+        return redirect()->route('van-ban.create')->with(['flash'=>['type'=>'success','message'=>'Thêm mới văn bản thành công!']]);
     }
 
     /**

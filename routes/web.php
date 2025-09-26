@@ -11,5 +11,8 @@ Route::get('/', function () {
 Route::get('/dashboard',function (){
    return Inertia::render('Auth/DashboardPage',[]);
 });
-Route::get('/them-van-ban', [VanBanController::class,'create']);
-Route::post('/them-van-ban', [VanBanController::class,'store']);
+Route::prefix('van-ban')->group(function (){
+    Route::post('/', [VanBanController::class,'store']);
+    Route::get('/them-moi', [VanBanController::class,'create'])->name('van-ban.create');
+});
+

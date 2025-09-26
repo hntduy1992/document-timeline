@@ -1,27 +1,27 @@
-import { createApp, h } from 'vue'
-import { createInertiaApp } from '@inertiajs/vue3'
+import {createApp, h} from 'vue'
+import {createInertiaApp} from '@inertiajs/vue3'
 import './bootstrap';
 import DefaultLayout from "@/Layouts/DefaultLayout.vue";
 import {resolvePageComponent} from "laravel-vite-plugin/inertia-helpers";
 
 //Vite::asset('resources/images/logo.png') }}
-import.meta.glob([
-    '../images/**',
-]);
+import.meta.glob(['../images/**',]);
 
 
-// Vuetify
 // Vuetify
 import '@mdi/font/css/materialdesignicons.css'
 import 'vuetify/styles'
-import { createVuetify } from 'vuetify'
+import {createVuetify} from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
+
 const vuetify = createVuetify({
     components,
     directives,
 })
 
+import Vue3Toastify, {toast} from "vue3-toastify";
+import 'vue3-toastify/dist/index.css';
 createInertiaApp({
     resolve: name => {
         const page = resolvePageComponent(
@@ -36,6 +36,10 @@ createInertiaApp({
     setup({el, App, props, plugin}) {
         createApp({render: () => h(App, props)})
             .use(plugin)
+            .use(Vue3Toastify,{
+                position: toast.POSITION.TOP_RIGHT,
+                autoClose: 3000,
+            } )
             .use(vuetify)
             .mount(el)
     },

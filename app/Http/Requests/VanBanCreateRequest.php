@@ -22,21 +22,21 @@ class VanBanCreateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'so_hieu'=>'required',
+            'so_hieu'=>'required|unique:van_ban,so_hieu',
             'ngay_ban_hanh'=>'required',
             'tieu_de'=>'required',
-            'tag'=>'array',
-            'file'=>'required|mimes:pdf,doc,docx'
+            'file'=>'required|file|mimes:pdf,doc,docx'
         ];
     }
 
     public function messages(): array
     {
         return [
-            'so_hieu.required'=>'Trường này không được trống',
-            'ngay_ban_hanh.required'=>'Trường này không được trống',
-            'tieu_de.required'=>'Trường này không được trống',
-            'file.required'=>'Trường này không được trống'
+            'so_hieu.required'=>'Trường này không được trống!',
+            'so_hieu.unique'=>'Số hiệu này đã có!',
+            'ngay_ban_hanh.required'=>'Trường này không được trống!',
+            'tieu_de.required'=>'Trường này không được trống!',
+            'file.required'=>'Trường này không được trống!'
         ];
     }
 }

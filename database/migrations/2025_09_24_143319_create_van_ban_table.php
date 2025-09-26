@@ -13,18 +13,25 @@ return new class extends Migration
     {
         Schema::create('van_ban', function (Blueprint $table) {
             $table->id();
+            $table->string('so_hieu');
+            $table->date('ngay_ban_hanh');
+            $table->string('tieu_de');
             $table->unsignedInteger('id_don_vi')->nullable();
             $table->unsignedInteger('id_user')->nullable();
-            $table->date('ngay_ban_hanh');
-            $table->boolean('trang_thai')->default(false);
-            $table->string('so_hieu')->nullable();
-            $table->string('tieu_de')->nullable();
             $table->string('trich_yeu')->nullable();
-            $table->string('file')->nullable();
-            $table->string('tag')->nullable();
+            $table->string('id_tags')->nullable();
+            $table->boolean('trang_thai')->default(false);
             $table->timestamps();
         });
-
+        Schema::create('van_ban_file', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedInteger('id_van_ban');
+            $table->string('path');
+            $table->string('name',255);
+            $table->string('extension',5);
+            $table->integer('size');
+            $table->timestamps();
+        });
         Schema::create('tags', function (Blueprint $table)
         {
             $table->id();
