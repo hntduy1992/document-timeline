@@ -2,6 +2,7 @@
 import Banner from "@/Layouts/Banner.vue";
 import {router} from "@inertiajs/vue3";
 import {ref} from "vue";
+import NavDefaultLayout from "@/Layouts/NavDefaultLayout.vue";
 
 const drawer = ref(true)
 
@@ -20,16 +21,7 @@ const timeout = 3000
             <v-btn @click="router.visit('/')">Home</v-btn>
             <v-btn append-icon="mdi-login" @click="router.visit('/dashboard')">Manager</v-btn>
         </v-app-bar>
-        <v-navigation-drawer v-model="drawer">
-            <v-list>
-                <v-list-item
-                    prepend-icon="mdi-file-plus"
-                    title="Văn bản mới"
-                    @click="router.get('/van-ban/them-moi')"
-                    link>
-                </v-list-item>
-            </v-list>
-        </v-navigation-drawer>
+        <NavDefaultLayout v-model="drawer"></NavDefaultLayout>
         <v-main>
             <slot></slot>
         </v-main>

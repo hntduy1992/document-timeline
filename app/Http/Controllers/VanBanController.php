@@ -17,7 +17,8 @@ class VanBanController extends Controller
      */
     public function index()
     {
-        //
+        $data = VanBan::all();
+        return Inertia::render('Auth/VanBan/IndexPage', ['data' => $data]);
     }
 
     /**
@@ -50,7 +51,7 @@ class VanBanController extends Controller
                 'size' => $fileUpload->getSize()
             ]);
         }
-        return redirect()->route('van-ban.create')->with(['flash'=>['type'=>'success','message'=>'Thêm mới văn bản thành công!']]);
+        return redirect()->route('van-ban.create')->with(['flash' => ['type' => 'success', 'message' => 'Thêm mới văn bản thành công!']]);
     }
 
     /**
