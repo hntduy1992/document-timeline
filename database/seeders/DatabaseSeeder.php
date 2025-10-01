@@ -22,5 +22,12 @@ class DatabaseSeeder extends Seeder
             'is_admin' => true,
             'id_don_vi' => 0
         ]);
+        User::create([
+            'username' => 'test',
+            'password' => Hash::make('test'),
+            'ho_ten' => 'Test User',
+            'is_admin' => false,
+            'id_don_vi' => 0
+        ]);
     }
 }

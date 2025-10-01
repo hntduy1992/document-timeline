@@ -42,6 +42,7 @@ class HandleInertiaRequests extends Middleware
                 'user' => $request->user() ? [
                     'id' => $request->user()->id,
                     'ho_ten' => $request->user()->ho_ten,
+                    'is_admin' => $request->user()->is_admin == 1,
                     'don_vi' => DonVi::query()->find($request->user()->id_don_vi) || 'root',
                 ] : null
             ],

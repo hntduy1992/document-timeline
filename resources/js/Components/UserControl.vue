@@ -29,23 +29,7 @@ const onLogout = () => {
 
 <template>
     <template v-if="page.props.auth.user">
-        <v-menu>
-            <template v-slot:activator="{ props }">
-                <span
-                    v-bind="props"
-                >
-                    Xin chào, {{ page.props.auth.user.ho_ten }}
-                </span>
-            </template>
-            <v-list>
-                <v-list-item
-                   link
-                   title="Dashboard"
-                   @click="router.visit('/dashboard')"
-                >
-                </v-list-item>
-            </v-list>
-        </v-menu>
+        <span>   Xin chào, {{ page.props.auth.user.ho_ten }}</span>
         <v-dialog
             v-model="dialog"
             width="auto"
