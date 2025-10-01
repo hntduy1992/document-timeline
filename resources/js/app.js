@@ -22,6 +22,9 @@ const vuetify = createVuetify({
     directives,
 })
 
+// Toast
+import 'vue3-toastify/dist/index.css';
+
 createInertiaApp({
     resolve: name => {
         const page = resolvePageComponent(
@@ -29,7 +32,7 @@ createInertiaApp({
             import.meta.glob("./Pages/**/*.vue")
         );
         page.then((module) => {
-            module.default.layout = module.default.layout || Layou;
+            module.default.layout = module.default.layout || DefaultLayout;
         });
         return page;
     },

@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\DonVi;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 
@@ -37,7 +38,18 @@ class HandleInertiaRequests extends Middleware
     {
         return [
             ...parent::share($request),
-            //
+            'auth' => [
+                'user' => $request->user() ? [
+                    'id' => $request->user()->id,
+                    'ho_ten' => $request->user()->ho_ten,
+                    'is_admin' => $request->user()->is_admin == 1,
+                    'don_vi' => DonVi::query()->find($request->user()->id_don_vi) || 'root',
+                ] : null
+            ],
+            'flash' => [
+                'type' => null,
+                'message' => null
+            ]
         ];
     }
 }
