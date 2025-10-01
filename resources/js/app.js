@@ -22,6 +22,9 @@ const vuetify = createVuetify({
     directives,
 })
 
+// Toast
+import 'vue3-toastify/dist/index.css';
+
 createInertiaApp({
     resolve: name => {
         const page = resolvePageComponent(

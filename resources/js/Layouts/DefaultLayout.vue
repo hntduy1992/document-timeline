@@ -1,32 +1,18 @@
 <template>
     <v-app id="inspire">
-        <v-app-bar
-            class="px-3"
-            density="compact"
-            flat
+        <v-app-bar v-if="!hiddenNav"
+                   class="px-3"
+                   density="compact"
+                   height="100"
         >
-            <v-avatar
-                class="hidden-md-and-up"
-                color="grey-darken-1"
-                size="32"
-            ></v-avatar>
+            <v-app-bar-title>
+                <span class="text-h4 font-weight-bold">BAN CHỈ ĐẠO CHUYỂN ĐỔI SỐ PHƯỜNG SA ĐÉC</span>
+            </v-app-bar-title>
+            <v-spacer/>
+            <template v-slot:append>
+                <UserControl></UserControl>
+            </template>
 
-            <v-spacer></v-spacer>
-
-            <v-tabs
-                align-tabs="center"
-                color="grey-darken-2"
-            >
-                <v-tab
-                    v-for="(link) in links"
-                    :key="link.href"
-                    :text="link.text"
-                    @click="router.visit(link.href)"
-                ></v-tab>
-            </v-tabs>
-            <v-spacer></v-spacer>
-
-            <UserControl></UserControl>
         </v-app-bar>
         <v-main>
             <slot></slot>
@@ -35,14 +21,11 @@
 </template>
 <script setup>
 import UserControl from "@/Components/UserControl.vue";
-import {router} from "@inertiajs/vue3";
+import {router, usePage} from "@inertiajs/vue3";
+import {computed, watch} from "vue";
 
-const links = [
-    {text: 'Dashboard', href: '/'},
-    {text: 'Messages', href: '/message'},
-    {text: 'Profile', href: '/profile'},
-    {text: 'Updates', href: '/updates'},
-]
+const page = usePage()
+const hiddenNav = computed(() => page.props.hide_nav)
 </script>
 <style scoped>
 
