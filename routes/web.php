@@ -22,4 +22,6 @@ Route::middleware('auth')->group(function () {
         Route::put('/{slug}/update', [DonViController::class, 'update'])->name('donvi.update');
         Route::delete('/{slug}/delete', [DonViController::class, 'delete'])->name('donvi.delete');
     });
+
+
 });

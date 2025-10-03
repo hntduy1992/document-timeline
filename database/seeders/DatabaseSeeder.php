@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\DonVi;
 use App\Models\User;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -28,6 +29,23 @@ class DatabaseSeeder extends Seeder
             'ho_ten' => 'Test User',
             'is_admin' => false,
             'id_don_vi' => 0
+        ]);
+
+        DonVi::create([
+            'ten_don_vi' => fake()->name,
+            'logo' => fake()->url
+        ]);
+        DonVi::create([
+            'ten_don_vi' => fake()->name,
+            'logo' => fake()->url
+        ]);
+        DonVi::create([
+            'ten_don_vi' => fake()->name,
+            'logo' => fake()->url
+        ]);
+        DonVi::create([
+            'ten_don_vi' => fake()->name,
+            'logo' => fake()->url
         ]);
     }
 }

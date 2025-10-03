@@ -19,6 +19,7 @@
                     :key="link.href"
                     :prepend-icon="link.icon"
                     :title="link.text"
+                    @click="router.visit(link.href)"
                     link
                 ></v-list-item>
             </v-list>
@@ -35,9 +36,9 @@ import {computed, ref, watch} from "vue";
 
 const page = usePage()
 const hiddenNav = computed(() => page.props.hide_nav)
-const drawer = computed(() => page.props.auth.user && page.props.auth.user.is_admin)
+const drawer = computed(() => (page.props.auth.user && page.props.auth.user.is_admin))
 const links = [
-    {text: 'Thông tin đơn vị', icon: 'mdi-archive-outline', href: '/thong-tin-don-vi'},
+    {text: 'Thông tin đơn vị', icon: 'mdi-archive-outline', href: '/don-vi/danh-sach'},
     {text: 'Hồ sơ', icon: 'mdi-account-group', href: '/ho-so'},
     {text: 'Văn bản', icon: 'mdi-file-document', href: '/van-ban'},
 ]
