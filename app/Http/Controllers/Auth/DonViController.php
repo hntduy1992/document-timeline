@@ -13,7 +13,7 @@ class DonViController extends Controller
     {
         $listDonVi = DonVi::all();
         $tableHeaders = [
-            ['title' => 'Logo', 'key' => 'logo', 'align' => 'end'],
+            ['title' => 'Logo', 'key' => 'logo', 'align' => 'start'],
             ['title' => 'Tên', 'key' => 'ten_don_vi', 'align' => 'start'],
             ['title' => 'Ngày tạo', 'key' => 'created_at', 'align' => 'start'],
             ['title' => 'Ngày cập nhật', 'key' => 'updated_at', 'align' => 'start'],
