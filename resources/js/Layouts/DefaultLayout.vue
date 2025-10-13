@@ -12,6 +12,7 @@
                 <UserControl></UserControl>
             </template>
         </v-app-bar>
+
         <v-navigation-drawer v-model="drawer">
             <v-list>
                 <v-list-item
@@ -20,11 +21,11 @@
                     :prepend-icon="link.icon"
                     :title="link.text"
                     @click="router.visit(link.href)"
-                    link
-                ></v-list-item>
+                >
+                </v-list-item>
             </v-list>
         </v-navigation-drawer>
-        <v-main>
+        <v-main class="bg-grey-lighten-4">
             <slot></slot>
         </v-main>
     </v-app>
@@ -46,4 +47,7 @@ const links = [
 </script>
 <style scoped>
 
+.v-list-item:hover {
+    color: $light-primary-color;
+}
 </style>

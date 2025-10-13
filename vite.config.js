@@ -2,6 +2,9 @@ import {defineConfig} from 'vite';
 import laravel from 'laravel-vite-plugin';
 import vue from '@vitejs/plugin-vue';
 import vuetify from "vite-plugin-vuetify";
+// 💡 Thêm dòng này vào đầu file
+import path from 'path';
+
 
 export default defineConfig({
     plugins: [
@@ -34,4 +37,12 @@ export default defineConfig({
             autoImport: true
         })
     ],
+    resolve: {
+        alias: {
+            // Thiết lập @ thành đường dẫn gốc của JS
+            '@': path.resolve(__dirname, 'resources/js'),
+            // Thiết lập @images trỏ đến resources/images
+            '@images': path.resolve(__dirname, 'resources/images'),
+        },
+    },
 });
