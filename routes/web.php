@@ -13,7 +13,7 @@ Route::get('/login', [AuthController::class, 'getLogin'])->name('login');
 Route::post('/login/check', [AuthController::class, 'checkLogin'])->name('checkLogin');
 Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::middleware('auth')->group(function () {
+Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('don-vi')->group(function () {
         Route::get('/danh-sach', [DonViController::class, 'index'])->name('donvi.index');
         Route::get('/them-moi', [DonViController::class, 'create'])->name('donvi.create');

@@ -2,16 +2,30 @@
 
 import {useForm} from "@inertiajs/vue3";
 import defaultImage from '@images/logo_cds.png'
-import {ref} from "vue";
+import {ref, useTemplateRef} from "vue";
 
 const formData = useForm({
     ten_don_vi: '',
     logo: ''
 })
+
+const formUploadFile = useForm({
+    fileUpload: null
+})
+
 const loading = ref(false)
 const emits = defineEmits(['formClosed', 'dialogSaved'])
 const onCloseClicked = () => {
     emits('formClosed', null);
+}
+
+const inputFile = useTemplateRef('uploadField')
+const onUploadClicked = () => {
+    inputFile.value.click();
+}
+
+const inputFileChanged = (e) => {
+    console.log(['change', formUploadFile.fileUpload])
 }
 </script>
 
@@ -29,8 +43,10 @@ const onCloseClicked = () => {
                 <v-img v-else :src="defaultImage" alt="Logo" width="100" height="100"></v-img>
             </v-sheet>
             <v-form>
-                <v-btn class="w-100">Đổi hình</v-btn>
-                <v-file-input class="d-none" label="Logo"></v-file-input>
+                <v-btn class="w-100" @click="onUploadClicked">Đổi hình</v-btn>
+
+                <v-file-input ref="uploadField" class="d-none" label="Logo"
+                              v-model="formUploadFile.fileUpload" @change="inputFileChanged"></v-file-input>
             </v-form>
         </v-card-text>
 

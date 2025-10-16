@@ -7,7 +7,6 @@ import CreateDonViForm from "@/Pages/Auth/DonVi/CreateDonViForm.vue";
 
 const page = usePage()
 
-
 const dialogCreateForm = ref(false)
 
 const onCreateButtonClick = () => {
@@ -17,6 +16,8 @@ const onCreateButtonClick = () => {
 const FormClosed = (e)=>{
     dialogCreateForm.value = false
 }
+
+
 </script>
 
 <template>

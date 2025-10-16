@@ -9,6 +9,7 @@
                 <span class="text-h5 font-weight-bold">BAN CHỈ ĐẠO CHUYỂN ĐỔI SỐ PHƯỜNG SA ĐÉC</span>
             </v-app-bar-title>
             <template v-slot:append>
+                <v-btn @click="testApi">Test Api</v-btn>
                 <UserControl></UserControl>
             </template>
         </v-app-bar>
@@ -34,6 +35,8 @@
 import UserControl from "@/Components/UserControl.vue";
 import {router, usePage} from "@inertiajs/vue3";
 import {computed, ref, watch} from "vue";
+import {tr} from "vuetify/locale";
+import axios from "axios";
 
 const page = usePage()
 const hiddenNav = computed(() => page.props.hide_nav)
@@ -44,6 +47,17 @@ const links = [
     {text: 'Văn bản', icon: 'mdi-file-document', href: '/van-ban'},
 ]
 
+const testApi = async () => {
+    try {
+        const response = await axios.post('/api/file/upload', {
+            file: null
+        })
+
+        console.log(response.data)
+    } catch (e) {
+        console.log(e)
+    }
+}
 </script>
 <style scoped>
 
